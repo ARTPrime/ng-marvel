@@ -1,0 +1,31 @@
+.mv-menu-button {
+    display: block;
+    margin: 0;
+    hr {
+        width: 18px;
+        margin: 0px auto;
+        display: block;
+        border: 1px solid;
+        border-color: inherit;
+        border-radius: 1px;
+        transition: all 500ms ease-out;
+        & + hr {
+            margin-top: var(--unit-sm);
+        }
+    }
+    &.nav--open hr {
+        &:nth-child(2) {
+            width: 0;
+            opacity: 0;
+        }
+        &:first-child {
+            transform: rotate(-45deg) translate(-1px, 1px);
+        }
+        &:nth-child(3) {
+            transform: rotate(45deg) translate(-1px, -2px);
+        }
+        & + hr {
+            margin-top: 0;
+        }
+    }
+}

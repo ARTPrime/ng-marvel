@@ -1,0 +1,107 @@
+@import './icon_variables';
+
+@font-face {
+    font-family: '#{$marvel-font-family}';
+    src: url('#{$marvel-font-path}/#{$marvel-font-family}.eot?4qhbkp');
+    src: url('#{$marvel-font-path}/#{$marvel-font-family}.eot?4qhbkp#iefix') format('embedded-opentype'),
+        url('#{$marvel-font-path}/#{$marvel-font-family}.ttf?4qhbkp') format('truetype'),
+        url('#{$marvel-font-path}/#{$marvel-font-family}.woff?4qhbkp') format('woff'),
+        url('#{$marvel-font-path}/#{$marvel-font-family}.svg?4qhbkp##{$marvel-font-family}') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+.mv-icon {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: '#{$marvel-font-family}' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    font-size: inherit;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: transform 300ms ease-out;
+    &.mv-icon-big {
+        font-size: var(--unit-lg-sm);
+    }
+    &.mv-flip {
+        transform: rotate(180deg);
+    }
+}
+
+.mv-chevron-down {
+    &:before {
+        content: $mv-chevron-down;
+    }
+}
+.mv-cyclops {
+    &:before {
+        content: $mv-cyclops;
+    }
+}
+.mv-daredevil {
+    &:before {
+        content: $mv-daredevil;
+    }
+}
+.mv-deadpool {
+    &:before {
+        content: $mv-deadpool;
+    }
+}
+.mv-flash {
+    &:before {
+        content: $mv-flash;
+    }
+}
+.mv-groot {
+    &:before {
+        content: $mv-groot;
+    }
+}
+.mv-ironman {
+    &:before {
+        content: $mv-ironman;
+    }
+}
+.mv-magneto {
+    &:before {
+        content: $mv-magneto;
+    }
+}
+.mv-spidy {
+    &:before {
+        content: $mv-spidy;
+    }
+}
+.mv-thanos {
+    &:before {
+        content: $mv-thanos;
+    }
+}
+.mv-thecap {
+    &:before {
+        content: $mv-thecap;
+    }
+}
+.mv-thor {
+    &:before {
+        content: $mv-thor;
+    }
+}
+.mv-wolverine {
+    &:before {
+        content: $mv-wolverine;
+    }
+}
+.mv-wonderwoman {
+    &:before {
+        content: $mv-wonderwoman;
+    }
+}

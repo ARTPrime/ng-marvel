@@ -1,0 +1,38 @@
+:root {
+    // Color pallete
+    --red-pigment: #ec1d24;
+    --red-pigment-2: #830b0f;
+    --deep-saffron: #ff973b;
+    --green-cyan: #049462;
+    --eerie-black: #151515;
+    --eerie-black-2: #1a1a1a;
+    --eerie-black-3: #1f1f1e;
+    --alabaster: #fefefe;
+    --cyber-yellow: #ffd013;
+    --blue-jeans: #66b3eb;
+    --sapphire-blue: #0565a2;
+
+    // units
+    --unit-xs: 2px;
+    --unit-sm: 4px;
+    --unit: 8px;
+    --unit-md: 12px;
+    --unit-md-sm: 14px;
+    --unit-lg: 16px;
+    --unit-lg-sm: 20px;
+    --unit-xl: 24px;
+    --unit-xl-sm: 30px;
+    --unit-xxl: 32px;
+    --unit-xxxl: 40px;
+
+    --mv-color-primary: var(--sapphire-blue);
+    --mv-color-secondary: var(--blue-jeans);
+    --mv-color-danger: var(--red-pigment);
+    --mv-color-danger-shade: var(--red-pigment-2);
+    --mv-color-warning: var(--cyber-yellow);
+    --mv-color-success: var(--green-cyan);
+    --mv-color-light: var(--alabaster);
+    --mv-color-dark: var(--eerie-black-2);
+    --mv-color-dark-tint: var(--eerie-black);
+    --mv-color-dark-shade: var(--eerie-black-3);
+}

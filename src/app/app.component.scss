@@ -1,0 +1,41 @@
+$nav-expanded-width: 300px;
+
+:host {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: fit-content(0) 1fr;
+    grid-template-areas:
+        'navigation main'
+        'navigation main';
+    grid-template-rows: 1fr 0.2fr;
+    overflow-x: hidden;
+}
+nav {
+    grid-area: navigation;
+    background-color: var(--mv-color-dark-tint);
+    background-size: cover;
+    background-position: center;
+    transition: margin, transform, 300ms ease-in;
+    width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    &.nav--open {
+        width: $nav-expanded-width;
+    }
+    mv-dropdown-menu {
+        width: 100%;
+        margin-top: auto;
+    }
+}
+.marvel_logo {
+    display: block;
+    margin: auto auto var(--unit-lg-sm);
+    width: 60%;
+    height: 10%;
+}
+main {
+    grid-area: main;
+    background-color: var(--mv-color-dark);
+    transition: margin, transform, 300ms ease-in;
+}

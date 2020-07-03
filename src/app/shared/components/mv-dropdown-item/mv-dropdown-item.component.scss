@@ -1,0 +1,8 @@
+div {
+    &.mv-dropdown-item--expandable {
+        overflow: hidden;
+        button {
+            cursor: default;
+        }
+    }
+}

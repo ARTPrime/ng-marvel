@@ -1,0 +1,48 @@
+[class^='mv-button-'],
+[class*=' mv-button-'],
+[class*='mv-button '],
+[class*=' mv-button '] {
+    height: var(--unit-xxxl);
+    color: var(--mv-color-light);
+    transition: background, width, margin, 200ms ease-in;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--unit-md-sm);
+    padding: var(--unit);
+    cursor: pointer;
+    &:focus {
+        outline: 0;
+        box-shadow: inset 0 0 0 3px var(--mv-color-primary);
+    }
+}
+.mv-button {
+    width: 100%;
+    i {
+        color: inherit;
+        &:first-child {
+            margin: 0 var(--unit);
+            color: inherit;
+        }
+        &:nth-child(2) {
+            margin-left: auto;
+            margin-right: var(--unit);
+        }
+    }
+}
+.mv-button-small {
+    width: var(--unit-xxxl);
+}
+.mv-button.mv-light,
+.mv-button.mv-dark {
+    &.mv-outline:hover {
+        color: var(--mv-color-danger);
+        border-color: var(--mv-color-danger);
+    }
+    &.mv-transparent:hover {
+        color: var(--mv-color-danger);
+    }
+    &.mv-solid:hover {
+        color: var(--mv-color-danger);
+    }
+}

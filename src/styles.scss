@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files*/
+
+@import './assets/fonts/roboto-condensed-fontface';
+@import './scss/variables';
+@import './scss/reset';
+@import './scss/buttons';
+@import './scss/menu-button';
+@import './scss/icons/icons';
+@import './scss/accordion';
+@import './scss/colors';
+@import './scss/dropdown';
+
+* {
+    font-family: 'Roboto Condensed';
+}
+
+html,
+body {
+    height: 100vh;
+}
