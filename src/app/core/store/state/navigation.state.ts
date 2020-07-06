@@ -1,26 +1,14 @@
 export interface NavigationState {
-    navItemsBig: Array<UiDropdownItem | UiButton>;
-    navItemsSmall: Array<UiDropdownItem | UiButton>;
+    navItems: Array<UiDropdownItem | UiButton>;
     isOpen: boolean;
 }
 
 export const defaultNavigationState: NavigationState = {
-    isOpen: false,
-    navItemsSmall: null,
-    navItemsBig: [
-        {
-            text: 'Home',
-            fill: 'mv-outline',
-            iconName: 'mv-thecap',
-            color: 'mv-light',
-            routerLink: ['/home']
-        },
+    isOpen: true,
+    navItems: [
         {
             button: {
-                text: 'Characters',
-                fill: 'mv-outline',
-                iconName: 'mv-spidy',
-                color: 'mv-danger'
+                text: 'Characters'
             },
             children: [
                 {
@@ -35,16 +23,11 @@ export const defaultNavigationState: NavigationState = {
                     text: 'Character stories',
                     routerLink: ['/characters/stories']
                 }
-            ],
-            fill: 'mv-transparent',
-            color: 'mv-light'
+            ]
         },
         {
             button: {
-                text: 'Comics',
-                fill: 'mv-outline',
-                iconName: 'mv-cyclops',
-                color: 'mv-warning'
+                text: 'Comics'
             },
             children: [
                 {
@@ -61,16 +44,11 @@ export const defaultNavigationState: NavigationState = {
                     text: "Comics's stories",
                     routerLink: ['/comics/stories']
                 }
-            ],
-            fill: 'mv-transparent',
-            color: 'mv-light'
+            ]
         },
         {
             button: {
-                text: 'Stories',
-                fill: 'mv-outline',
-                iconName: 'mv-ironman',
-                color: 'mv-success'
+                text: 'Stories'
             },
             children: [
                 {
@@ -81,9 +59,7 @@ export const defaultNavigationState: NavigationState = {
                     text: 'Stories comics',
                     routerLink: ['/stories/comics']
                 }
-            ],
-            fill: 'mv-transparent',
-            color: 'mv-light'
+            ]
         }
     ]
 };

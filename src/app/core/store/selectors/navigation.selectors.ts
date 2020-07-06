@@ -6,4 +6,5 @@ export const selectFeature: MemoizedSelector<object, NavigationState> = createFe
     'navigation'
 );
 
-export const selectIdOpen = createSelector(selectFeature, (state: NavigationState) => state.isOpen);
+export const selectIsOpen = createSelector(selectFeature, (state: NavigationState) => state.isOpen);
+export const selectNavItems = createSelector(selectFeature, (state: NavigationState) => state.navItems);

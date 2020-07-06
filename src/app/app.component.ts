@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { filter, take } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { filter, map, take } from 'rxjs/operators';
+import { selectIsOpen, selectNavItems } from 'src/app/core/store/selectors/navigation.selectors';
 
 import { AppReadyService } from './core/services/app-ready/app-ready.service';
+import { navigationToggle } from './core/store/actions/navigation.actions';
 
 @Component({
     selector: 'mv-root',
@@ -10,10 +14,11 @@ import { AppReadyService } from './core/services/app-ready/app-ready.service';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-    public navItems: Array<UiDropdownItem | UiButton>;
+    public navItems$: Observable<Array<UiDropdownItem | UiButton>>;
+    public navToggle$: Observable<UiMenuButton>;
     public navToggle: UiMenuButton;
 
-    constructor(private router: Router, private appReadyService: AppReadyService) {}
+    constructor(private router: Router, private appReadyService: AppReadyService, private store: Store) {}
 
     public ngOnInit() {
         // Hide initial loader
@@ -23,98 +28,17 @@ export class AppComponent implements OnInit {
                 take(1)
             )
             .subscribe(() => this.appReadyService.trigger());
-        this.navToggle = {
-            fill: 'mv-solid',
-            color: 'mv-danger',
-            toggle: true
-        };
-        this.navItems = this.createNavItems();
+        this.navToggle$ = this.store.select(selectIsOpen).pipe(
+            map(v => ({
+                fill: 'mv-solid',
+                color: 'mv-danger',
+                toggle: v
+            }))
+        );
+        this.navItems$ = this.store.select(selectNavItems);
     }
 
     public onMenuButtonClick() {
-        this.navToggle.toggle = !this.navToggle.toggle;
-    }
-
-    private createNavItems(): Array<UiDropdownItem | UiButton> {
-        // Add this as a state slice
-        return [
-            {
-                text: 'Home',
-                fill: 'mv-outline',
-                iconName: 'mv-thecap',
-                color: 'mv-light',
-                routerLink: ['/home']
-            },
-            {
-                button: {
-                    text: 'Characters',
-                    fill: 'mv-outline',
-                    iconName: 'mv-spidy',
-                    color: 'mv-danger'
-                },
-                children: [
-                    {
-                        text: 'All characters',
-                        routerLink: ['/characters']
-                    },
-                    {
-                        text: 'Character comics',
-                        routerLink: ['/characters/comics']
-                    },
-                    {
-                        text: 'Character stories',
-                        routerLink: ['/characters/stories']
-                    }
-                ],
-                fill: 'mv-transparent',
-                color: 'mv-light'
-            },
-            {
-                button: {
-                    text: 'Comics',
-                    fill: 'mv-outline',
-                    iconName: 'mv-cyclops',
-                    color: 'mv-warning'
-                },
-                children: [
-                    {
-                        text: 'All comics',
-                        routerLink: ['/comics']
-                    },
-                    {
-                        // tslint:disable-next-line: quotemark
-                        text: "Comics's characters",
-                        routerLink: ['/comics/characters']
-                    },
-                    {
-                        // tslint:disable-next-line: quotemark
-                        text: "Comics's stories",
-                        routerLink: ['/comics/stories']
-                    }
-                ],
-                fill: 'mv-transparent',
-                color: 'mv-light'
-            },
-            {
-                button: {
-                    text: 'Stories',
-                    fill: 'mv-outline',
-                    iconName: 'mv-ironman',
-                    color: 'mv-success'
-                },
-                children: [
-                    {
-                        text: 'All stories',
-                        routerLink: ['/stories']
-                    },
-                    {
-                        text: 'Stories comics',
-                        routerLink: ['/stories/comics']
-                    }
-                ],
-                fill: 'mv-transparent',
-                color: 'mv-light'
-            }
-        ];
+        this.store.dispatch(navigationToggle());
     }
 }

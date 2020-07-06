@@ -9,6 +9,7 @@ import {
     setStoryComics
 } from '../actions/stories.actions';
 import { defaultStoriesState, StoriesState } from '../state/stories.state';
+import { appendStories } from './functions/stories.functions';
 
 const reducer = createReducer(
     defaultStoriesState,
@@ -18,7 +19,7 @@ const reducer = createReducer(
     })),
     on(setStories, (state: StoriesState, { stories }) => ({
         ...state,
-        stories,
+        stories: state.stories ? { ...state.stories, ...appendStories(state, stories) } : stories,
         loadingStories: false
     })),
     on(getStoryCharacters, (state: StoriesState) => ({

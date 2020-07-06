@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -10,8 +10,10 @@ import { ENDPOINTS } from '../api.endpoints';
 export class ComicsService {
     constructor(private http: HttpClient) {}
 
-    public getComics(): Observable<any> {
-        return this.http.get(ENDPOINTS.comics);
+    public getComics(offset: number): Observable<any> {
+        return this.http.get(ENDPOINTS.comics, {
+            params: new HttpParams().set('offset', offset ? offset.toString() : '0')
+        });
     }
     public getComic(id: number): Observable<any> {
         return this.http.get(ENDPOINTS.comic(id));

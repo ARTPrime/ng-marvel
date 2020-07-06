@@ -11,7 +11,7 @@ import { selectCharacters, selectLoadingCharacters } from '../../store/selectors
     providedIn: 'root'
 })
 export class CharactersLoadGuard implements Resolve<any> {
-    constructor(private store: Store<{}>) {}
+    constructor(private store: Store) {}
 
     public resolve(): Observable<any> {
         return this.store.select(selectCharacters).pipe(
@@ -19,7 +19,7 @@ export class CharactersLoadGuard implements Resolve<any> {
             filter(([, loading]) => !loading),
             tap(([characters]) => {
                 if (!characters) {
-                    this.store.dispatch(getCharacaters());
+                    this.store.dispatch(getCharacaters({ offset: 0 }));
                 }
             }),
             takeWhile(([characters]) => !characters, true)

@@ -1,7 +1,7 @@
 export const DRXAVIER = '97a87b23c5ce77b3168f202ff3300d8ea6f5f39b';
 export const MAGNETO = '1d6e8a796e64a15f59094589ebac0673';
 
-const BASE = 'https://gateway.marvel.com';
+const BASE = ' https://gateway.marvel.com';
 
 export const ENDPOINTS = {
     characters: `${BASE}/v1/public/characters`,

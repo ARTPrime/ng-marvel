@@ -11,6 +11,7 @@ import {
     setCharacterStories
 } from '../actions/characters.actions';
 import { CharactersState, defaultCharacterState } from '../state/characters.state';
+import { appendCharacters } from './functions/characters.functions';
 
 const reducer = createReducer(
     defaultCharacterState,
@@ -20,7 +21,7 @@ const reducer = createReducer(
     })),
     on(setCharacaters, (state: CharactersState, { characters }) => ({
         ...state,
-        characters,
+        characters: state.characters ? { ...state.characters, ...appendCharacters(state, characters) } : characters,
         loadingCharacters: false
     })),
     on(getCharacater, (state: CharactersState) => ({

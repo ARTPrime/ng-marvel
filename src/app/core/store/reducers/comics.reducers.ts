@@ -11,6 +11,7 @@ import {
     setComicStories
 } from '../actions/comics.actions';
 import { ComicsState, defaultComicsState } from '../state/comics.state';
+import { appendComics } from './functions/comics.functions';
 
 const reducer = createReducer(
     defaultComicsState,
@@ -20,7 +21,7 @@ const reducer = createReducer(
     })),
     on(setComics, (state: ComicsState, { comics }) => ({
         ...state,
-        comics,
+        comics: state.comics ? { ...state.comics, ...appendComics(state, comics) } : comics,
         loadingComics: false
     })),
     on(getComic, (state: ComicsState) => ({

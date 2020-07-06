@@ -13,9 +13,11 @@ $nav-expanded-width: 300px;
 nav {
     grid-area: navigation;
     background-color: var(--mv-color-dark-tint);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('/assets/images/marvel-characters.jpg');
     background-size: cover;
     background-position: center;
-    transition: margin, transform, 300ms ease-in;
+    transition: margin, transform, 200ms ease-in;
     width: 0;
     display: flex;
     flex-direction: column;
@@ -38,4 +40,17 @@ main {
     grid-area: main;
     background-color: var(--mv-color-dark);
     transition: margin, transform, 300ms ease-in;
+    position: relative;
+    .mv-toolbar {
+        width: calc(100% - var(--unit-xxxl));
+        display: inline-flex;
+        background-color: var(--mv-color-dark-shade);
+        height: var(--unit-xxxl);
+        vertical-align: top;
+        align-items: center;
+        padding: 0 var(--unit);
+        mv-loader {
+            margin-left: auto;
+        }
+    }
 }

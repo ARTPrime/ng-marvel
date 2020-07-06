@@ -17,7 +17,7 @@ export class StoriesEffects {
     public loadStories$ = createEffect(() =>
         this.actions$.pipe(
             ofType(getStories),
-            switchMap(() => this.storiesService.getStories()),
+            switchMap(({ offset }) => this.storiesService.getStories(offset)),
             map(stories => setStories({ stories }))
         )
     );

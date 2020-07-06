@@ -1,17 +1,19 @@
-import { Directive, ElementRef, Input, OnInit } from '@angular/core';
+import { Directive, HostBinding, Input, OnInit } from '@angular/core';
 
 @Directive({
     selector: '[mvDropdownIcon]'
 })
 export class MvDropdownIconDirective implements OnInit {
     @Input() public name: UiIconChevronDown;
-    @Input() public animation: UiFlip;
+    @HostBinding('class.mv-flip') private flip: boolean;
 
-    constructor(private element: ElementRef<HTMLElement>) {}
+    constructor() {}
 
-    public ngOnInit(): void {}
+    public ngOnInit(): void {
+        this.flip = false;
+    }
 
     public toggle() {
-        this.element.nativeElement.classList.toggle(this.animation);
+        this.flip = !this.flip;
     }
 }

@@ -1,16 +1,17 @@
 import { AfterViewInit, Component, HostBinding, Input, OnInit, TemplateRef } from '@angular/core';
-
-import { MvDropdownItemComponent } from '../mv-dropdown-item/mv-dropdown-item.component';
+import { MvDropdownItemDirective } from '@shared/directives/mv-dropdown-item/mv-dropdown-item.directive';
 
 @Component({
     selector: 'mv-dropdown-menu',
-    templateUrl: './mv-dropdown-menu.component.html',
+    template: `<ng-container *ngFor="let item of items">
+        <ng-container [ngTemplateOutlet]="itemTemplate" [ngTemplateOutletContext]="{ $implicit: item }"></ng-container
+    ></ng-container>`,
     styleUrls: ['./mv-dropdown-menu.component.scss']
 })
 export class MvDropdownMenuComponent implements OnInit, AfterViewInit {
-    @Input() public items: any;
+    @Input() public items: Array<UiDropdownItem | UiButton>;
     @Input() public display: 'row' | 'column';
-    @Input() public itemTemplate: TemplateRef<MvDropdownItemComponent>;
+    @Input() public itemTemplate: TemplateRef<MvDropdownItemDirective>;
 
     @HostBinding('class.mv-dropdown-menu--row') get displayRow() {
         return this.display === 'row';

@@ -11,7 +11,7 @@ import { selectComics, selectLoadingComics } from '../../store/selectors/comics.
     providedIn: 'root'
 })
 export class ComicsLoadGuard implements Resolve<any> {
-    constructor(private store: Store<{}>) {}
+    constructor(private store: Store) {}
 
     public resolve(): Observable<any> {
         return this.store.select(selectComics).pipe(
@@ -19,7 +19,7 @@ export class ComicsLoadGuard implements Resolve<any> {
             filter(([, loading]) => !loading),
             tap(([comics]) => {
                 if (!comics) {
-                    this.store.dispatch(getComics());
+                    this.store.dispatch(getComics({ offset: 0 }));
                 }
             }),
             takeWhile(([comics]) => !comics, true)

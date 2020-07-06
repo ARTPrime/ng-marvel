@@ -1,7 +1,8 @@
 .mv-menu-button {
-    display: block;
-    margin: 0;
-    hr {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    span hr {
         width: 18px;
         margin: 0px auto;
         display: block;
@@ -13,7 +14,7 @@
             margin-top: var(--unit-sm);
         }
     }
-    &.nav--open hr {
+    &.nav--open span hr {
         &:nth-child(2) {
             width: 0;
             opacity: 0;

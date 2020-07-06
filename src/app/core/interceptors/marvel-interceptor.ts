@@ -1,4 +1,4 @@
-import { HttpHandler, HttpInterceptor, HttpParams, HttpRequest } from '@angular/common/http';
+import { HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Md5 } from 'ts-md5/dist/md5';
 
@@ -11,16 +11,17 @@ export class MarvelInterceptor implements HttpInterceptor {
         const md5 = new Md5();
 
         const cloned = req.clone({
-            params: new HttpParams()
-                .set('ts', stamp.toString())
-                .set('apikey', MAGNETO)
-                .set(
+            params: req.params
+                .append('ts', stamp.toString())
+                .append('apikey', MAGNETO)
+                .append(
                     'hash',
                     md5
                         .appendStr(stamp.toString() + DRXAVIER + MAGNETO)
                         .end()
                         .toString()
                 )
+                .append('limit', '56')
         });
 
         return next.handle(cloned);

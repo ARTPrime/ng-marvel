@@ -1,7 +1,7 @@
-<nav [ngClass]="{ 'nav--open': navToggle.toggle }">
-    <mv-dropdown-menu [display]="'column'" [items]="navItems" [itemTemplate]="dropdownItem" *ngIf="navToggle.toggle">
+<nav *ngIf="navToggle$ | async" [ngClass]="{ 'nav--open': (navToggle$ | async).toggle }">
+    <mv-dropdown-menu [display]="'column'" [items]="navItems$ | async" [itemTemplate]="dropdownItem">
         <ng-template #dropdownItem let-item>
-            <mv-dropdown-item>
+            <div mvDropdownItem [item]="item">
                 <ng-container *ngIf="item.children; else noChildren">
                     <button class="mv-dropdown-item--header" mvButton fill="mv-outline" color="mv-light">
                         <span>
@@ -23,14 +23,22 @@
                         </span>
                     </button>
                 </ng-template>
-                <mv-dropdown-submenu *ngIf="item.children">
+                <div mvDropdownSubmenu *ngIf="item.children">
                     <ng-container *ngFor="let child of item.children">
-                        <button [routerLink]="child.routerLink" mvButton fill="mv-solid" color="mv-dark">
-                            {{ child.text }}
+                        <button
+                            [routerLink]="child.routerLink"
+                            class="mv-submenu--button"
+                            mvButton
+                            fill="mv-solid"
+                            color="mv-dark"
+                        >
+                            <span>
+                                {{ child.text }}
+                            </span>
                         </button>
                     </ng-container>
-                </mv-dropdown-submenu>
-            </mv-dropdown-item>
+                </div>
+            </div>
         </ng-template>
     </mv-dropdown-menu>
     <img class="marvel_logo" src="/assets/images/marvel.svg" alt="marvel_logo" />
@@ -40,9 +48,16 @@
         (click)="onMenuButtonClick()"
         mvButton
         mvMenuButton
-        [fill]="navToggle.fill"
-        [color]="navToggle.color"
-        [toggle]="navToggle.toggle"
+        *ngIf="navToggle$ | async"
+        [fill]="(navToggle$ | async).fill"
+        [color]="(navToggle$ | async).color"
+        [toggle]="(navToggle$ | async).toggle"
     ></button>
+    <!-- <div class="mv-toolbar">
+        <mv-loader [color]="'mv-danger'" [size]="'mv-loader--xs'"></mv-loader>
+    </div> -->
     <router-outlet></router-outlet>
+    <div mvOverlay mvNavigationOverlay [color]="'mv-warning'">
+        <mv-loader [color]="'mv-dark'" [size]="'mv-loader--big'"></mv-loader>
+    </div>
 </main>

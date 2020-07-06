@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-export const getStories = createAction('[Stories] Get');
+export const getStories = createAction('[Stories] Get', props<{ offset?: number }>());
 export const getStoryComics = createAction('[Story Comics] Get', props<{ id?: number }>());
 export const getStoryCharacters = createAction('[Story Characters] Get', props<{ id?: number }>());
 

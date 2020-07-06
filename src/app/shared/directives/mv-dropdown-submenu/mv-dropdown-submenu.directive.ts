@@ -1,15 +1,15 @@
-import { Component, ContentChildren, HostBinding, OnInit, QueryList } from '@angular/core';
-import { MvButtonDirective } from '@shared/directives/mv-button/mv-button.directive';
+import { ContentChildren, Directive, HostBinding, Input, OnInit, QueryList } from '@angular/core';
 
-@Component({
-    selector: 'mv-dropdown-submenu',
-    templateUrl: './mv-dropdown-submenu.component.html',
-    styleUrls: ['./mv-dropdown-submenu.component.scss']
+import { MvButtonDirective } from '../mv-button/mv-button.directive';
+
+@Directive({
+    selector: '[mvDropdownSubmenu]'
 })
-export class MvDropdownSubmenuComponent implements OnInit {
+export class MvDropdownSubmenuDirective implements OnInit {
     @ContentChildren(MvButtonDirective) public items: QueryList<MvButtonDirective>;
     @HostBinding('style.max-height') public height: string;
-    public open: boolean;
+    @HostBinding('class.mv-dropdown--submenu') class = true;
+    @Input() public open: boolean;
 
     public childrenCount = () => this.items.length;
     public getHeight = () => this.childrenCount() * 40;

@@ -42,6 +42,9 @@
     &.mv-transparent:hover {
         color: var(--mv-color-danger);
     }
+    &.mv-solid.mv-submenu--button:hover {
+        color: var(--mv-color-warning);
+    }
     &.mv-solid:hover {
         color: var(--mv-color-danger);
     }

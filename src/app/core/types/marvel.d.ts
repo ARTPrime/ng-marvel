@@ -79,13 +79,13 @@ declare type MarvelStory = {
 };
 
 declare type MarvelUrl = {
-    type: number;
-    url: number;
+    type: string;
+    url: string;
 };
 
 declare type MarvelImage = {
-    path: number;
-    extension: number;
+    path: string;
+    extension: string;
 };
 
 declare type MarvelList = {

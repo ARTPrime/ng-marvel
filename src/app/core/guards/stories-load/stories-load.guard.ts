@@ -11,7 +11,7 @@ import { selectLoadingStories, selectStories } from '../../store/selectors/stori
     providedIn: 'root'
 })
 export class StoriesLoadGuard implements Resolve<any> {
-    constructor(private store: Store<{}>) {}
+    constructor(private store: Store) {}
 
     public resolve(): Observable<any> {
         return this.store.select(selectStories).pipe(
@@ -19,7 +19,7 @@ export class StoriesLoadGuard implements Resolve<any> {
             filter(([, loading]) => !loading),
             tap(([stories]) => {
                 if (!stories) {
-                    this.store.dispatch(getStories());
+                    this.store.dispatch(getStories({ offset: 0 }));
                 }
             }),
             takeWhile(([stories]) => !stories, true)

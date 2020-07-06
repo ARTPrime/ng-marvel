@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ComicsListComponent } from './comics-list.component';
+import { MvLoaderComponent } from './mv-loader.component';
 
-describe('ComicsListComponent', () => {
-  let component: ComicsListComponent;
-  let fixture: ComponentFixture<ComicsListComponent>;
+describe('MvLoaderComponent', () => {
+  let component: MvLoaderComponent;
+  let fixture: ComponentFixture<MvLoaderComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ComicsListComponent ]
+      declarations: [ MvLoaderComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ComicsListComponent);
+    fixture = TestBed.createComponent(MvLoaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

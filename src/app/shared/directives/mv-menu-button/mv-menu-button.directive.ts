@@ -1,10 +1,12 @@
-import { Directive, ElementRef, HostListener, Input, OnInit, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, HostBinding, HostListener, Input, OnInit, Renderer2 } from '@angular/core';
 
 @Directive({
     selector: '[mvMenuButton]'
 })
 export class MvMenuButtonDirective implements OnInit {
     @Input() public toggle: boolean;
+    @HostBinding('class.mv-menu-button') menuButton = true;
+    @HostBinding('class.mv-button-small') buttonSmall = true;
     constructor(private element: ElementRef<HTMLElement>, private renderer: Renderer2) {}
 
     // Toggle button class on click
@@ -14,17 +16,15 @@ export class MvMenuButtonDirective implements OnInit {
 
     public ngOnInit() {
         const nativeElement = this.element.nativeElement;
-        // Add line elements in button to create icon
+        // Add span and line elements in button to create icon
+        const icon = this.renderer.createElement('span');
         for (let i = 0; i < 3; i++) {
             const hr = this.renderer.createElement('hr');
-            nativeElement.appendChild(hr);
+            icon.appendChild(hr);
         }
-        // Add button class
-        nativeElement.classList.add('mv-menu-button');
-        // Add size class
-        nativeElement.classList.add('mv-button-small');
+        nativeElement.appendChild(icon);
         // Add open class if toggle = true
-        if (Boolean(this.toggle)) {
+        if (this.toggle) {
             nativeElement.classList.add('nav--open');
         }
     }

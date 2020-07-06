@@ -19,7 +19,7 @@ export class ComicsEffects {
     public loadComics$ = createEffect(() =>
         this.actions$.pipe(
             ofType(getComics),
-            switchMap(() => this.comicsService.getComics()),
+            switchMap(({ offset }) => this.comicsService.getComics(offset)),
             map(comics => setComics({ comics }))
         )
     );

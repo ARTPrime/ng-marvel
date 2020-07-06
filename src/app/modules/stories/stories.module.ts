@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { MvSharedModule } from '@shared/mv-shared.module';
 import { StoriesEffects } from 'src/app/core/store/effects/stories.effects';
 import { storiesReducer } from 'src/app/core/store/reducers/stories.reducers';
 
@@ -16,7 +17,8 @@ import { StoriesComponent } from './stories.component';
         CommonModule,
         StoreModule.forFeature('stories', storiesReducer),
         EffectsModule.forFeature([StoriesEffects]),
-        StoriesRoutingModule
+        StoriesRoutingModule,
+        MvSharedModule
     ]
 })
 export class StoriesModule {}

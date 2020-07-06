@@ -19,7 +19,7 @@ export class CharactersEffects {
     public loadCharacters$ = createEffect(() =>
         this.actions$.pipe(
             ofType(getCharacaters),
-            switchMap(() => this.charactersSercive.getCharacters()),
+            switchMap(({ offset }) => this.charactersSercive.getCharacters(offset)),
             map(characters => setCharacaters({ characters }))
         )
     );
