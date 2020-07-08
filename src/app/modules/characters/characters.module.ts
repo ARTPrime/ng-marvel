@@ -9,10 +9,18 @@ import { charactersReducer } from 'src/app/core/store/reducers/characters.reduce
 import { CharactersRoutingModule } from './characters-routing.module';
 import { CharactersComponent } from './characters.component';
 import { CharacterComicsComponent } from './components/character-comics/character-comics.component';
+import { CharacterDetailComponent } from './components/character-detail/character-detail.component';
 import { CharacterStoriesComponent } from './components/character-stories/character-stories.component';
+import { NoCharacterComponent } from './components/no-character/no-character.component';
 
 @NgModule({
-    declarations: [CharactersComponent, CharacterComicsComponent, CharacterStoriesComponent],
+    declarations: [
+        CharactersComponent,
+        CharacterComicsComponent,
+        CharacterStoriesComponent,
+        NoCharacterComponent,
+        CharacterDetailComponent
+    ],
     imports: [
         CommonModule,
         StoreModule.forFeature('characters', charactersReducer),

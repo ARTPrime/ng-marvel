@@ -19,7 +19,7 @@ declare type MarvelData = {
 declare type MarvelCharacter = {
     id: number;
     name: number;
-    description: number;
+    description: string;
     modified: Date;
     resourceURI: number;
     urls: Array<MarvelUrl>;

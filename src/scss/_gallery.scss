@@ -1,5 +1,5 @@
 .mv-gallery {
-    height: calc(100% - 40px);
+    height: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     width: 100%;
@@ -56,6 +56,11 @@
         figcaption {
             animation: headShake;
             animation-duration: 400ms;
+        }
+    }
+    &.item--selected {
+        &::before {
+            filter: grayscale(0);
         }
     }
 }

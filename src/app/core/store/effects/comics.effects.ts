@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, switchMap } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 
 import { ComicsService } from '../../services/api/comics/comics.service';
+import { LocalStorageService } from '../../services/local-storage/local-storage.service';
 import {
-    getComic,
     getComicCharacters,
     getComics,
     getComicStories,
@@ -13,22 +14,28 @@ import {
     setComics,
     setComicStories
 } from '../actions/comics.actions';
+import { selectComicsState } from '../selectors/comics.selectors';
 
 @Injectable()
 export class ComicsEffects {
+    public persistSites$ = createEffect(
+        () =>
+            this.actions$.pipe(
+                ofType(setComic, setComics, setComicCharacters, setComicStories),
+                withLatestFrom(this.store.select(selectComicsState)),
+                filter(([, comics]) => !!comics),
+                tap(([, comics]) => this.localStorageService.setItem('Comics', comics))
+            ),
+        {
+            dispatch: false
+        }
+    );
+
     public loadComics$ = createEffect(() =>
         this.actions$.pipe(
             ofType(getComics),
             switchMap(({ offset }) => this.comicsService.getComics(offset)),
             map(comics => setComics({ comics }))
-        )
-    );
-
-    public loadComic$ = createEffect(() =>
-        this.actions$.pipe(
-            ofType(getComic),
-            switchMap(({ id }) => this.comicsService.getComic(id)),
-            map(comic => setComic({ comic }))
         )
     );
 
@@ -48,5 +55,10 @@ export class ComicsEffects {
         )
     );
 
-    constructor(private actions$: Actions, private comicsService: ComicsService) {}
+    constructor(
+        private actions$: Actions,
+        private comicsService: ComicsService,
+        private store: Store,
+        private localStorageService: LocalStorageService
+    ) {}
 }

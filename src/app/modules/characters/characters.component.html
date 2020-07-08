@@ -1,7 +1,17 @@
 <mv-gallery [items]="characters$ | async" [itemTemplate]="imgTemplate" [itemSize]="galleryItemSize">
     <ng-template #imgTemplate let-item>
-        <figure mvGalleryItem [item]="item" [itemSize]="galleryItemSize">
+        <figure
+            mvGalleryItem
+            [item]="item"
+            [selected]="selectedCharacter ? selectedCharacter.id === item.id : false"
+            [itemSize]="galleryItemSize"
+            (click)="onItemClick(item)"
+        >
             <figcaption>{{ item.name }}</figcaption>
         </figure>
     </ng-template>
 </mv-gallery>
+<mv-loader *ngIf="charactersLoading" [size]="'mv-loader--big'" [color]="'mv-danger'"></mv-loader>
+<section>
+    <router-outlet></router-outlet>
+</section>

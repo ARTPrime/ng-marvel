@@ -1,11 +1,10 @@
 export interface ComicsState {
     comics: MarvelCollection;
-    comic: MarvelCollection;
+    comic: MarvelComic;
     comicCharacters: MarvelCollection;
     comicStories: MarvelCollection;
 
     loadingComics: boolean;
-    loadingComic: boolean;
     loadingComicCharacters: boolean;
     loadingComicStories: boolean;
 }
@@ -17,7 +16,6 @@ export const defaultComicsState: ComicsState = {
     comicStories: null,
 
     loadingComics: false,
-    loadingComic: false,
     loadingComicCharacters: false,
     loadingComicStories: false
 };

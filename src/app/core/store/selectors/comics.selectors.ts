@@ -2,22 +2,21 @@ import { createFeatureSelector, createSelector, MemoizedSelector } from '@ngrx/s
 
 import { ComicsState } from '../state/comics.state';
 
-export const selectFeature: MemoizedSelector<object, ComicsState> = createFeatureSelector<ComicsState>('comics');
+export const selectComicsState: MemoizedSelector<object, ComicsState> = createFeatureSelector<ComicsState>('comics');
 
-export const selectComics = createSelector(selectFeature, (state: ComicsState) => state.comics);
-export const selectLoadingComics = createSelector(selectFeature, (state: ComicsState) => state.loadingComics);
+export const selectComics = createSelector(selectComicsState, (state: ComicsState) => state.comics);
+export const selectLoadingComics = createSelector(selectComicsState, (state: ComicsState) => state.loadingComics);
 
-export const selectComicCharacters = createSelector(selectFeature, (state: ComicsState) => state.comicCharacters);
+export const selectComicCharacters = createSelector(selectComicsState, (state: ComicsState) => state.comicCharacters);
 export const selectLoadingComicharacters = createSelector(
-    selectFeature,
+    selectComicsState,
     (state: ComicsState) => state.loadingComicCharacters
 );
 
-export const selectComicsStories = createSelector(selectFeature, (state: ComicsState) => state.comicStories);
+export const selectComicsStories = createSelector(selectComicsState, (state: ComicsState) => state.comicStories);
 export const selectLoadingComicsStories = createSelector(
-    selectFeature,
+    selectComicsState,
     (state: ComicsState) => state.loadingComicStories
 );
 
-export const selectComic = createSelector(selectFeature, (state: ComicsState) => state.comic);
-export const selectLoadingComic = createSelector(selectFeature, (state: ComicsState) => state.loadingComic);
+export const selectComic = createSelector(selectComicsState, (state: ComicsState) => state.comic);

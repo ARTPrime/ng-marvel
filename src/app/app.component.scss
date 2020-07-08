@@ -8,7 +8,7 @@ $nav-expanded-width: 300px;
         'navigation main'
         'navigation main';
     grid-template-rows: 1fr 0.2fr;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 nav {
     grid-area: navigation;
@@ -49,8 +49,5 @@ main {
         vertical-align: top;
         align-items: center;
         padding: 0 var(--unit);
-        mv-loader {
-            margin-left: auto;
-        }
     }
 }

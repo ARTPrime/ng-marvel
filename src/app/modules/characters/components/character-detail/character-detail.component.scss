@@ -1,0 +1,81 @@
+:host {
+    animation: fadeIn;
+    animation-duration: 300ms;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    header {
+        height: 40%;
+        background-position-x: 50%;
+        background-size: contain;
+        display: flex;
+        h1 {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            font-size: 4rem;
+            color: var(--mv-color-light);
+            font-weight: 600;
+            width: fit-content;
+            margin: auto;
+            transition: opacity 200ms ease-in;
+            animation: fadeInUp;
+            animation-duration: 300ms;
+            text-align: center;
+            &:hover {
+                opacity: 0;
+            }
+        }
+    }
+    section {
+        padding: var(--unit-lg);
+        color: var(--mv-color-light);
+        height: 60%;
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+        article:first-child {
+            font-size: var(--unit-lg-sm);
+        }
+        article:nth-child(2),
+        article:nth-child(3) {
+            display: flex;
+            flex-direction: column;
+            flex-flow: wrap;
+            justify-content: flex-start;
+            h2 {
+                color: var(--mv-color-warning);
+                font-weight: 600;
+                font-size: var(--unit-xxl);
+                display: block;
+                width: 100%;
+                padding: 16px 0;
+            }
+            a {
+                font-size: var(--unit-md);
+                background-color: var(--mv-color-primary);
+                padding: var(--unit);
+                display: inline-block;
+                height: 30px;
+                text-align: center;
+                white-space: nowrap;
+                margin-top: 4px;
+                max-width: 280px;
+                overflow: hidden;
+                margin-left: var(--unit-sm);
+            }
+        }
+        &::-webkit-scrollbar-track {
+            background-color: var(--mv-color-dark);
+        }
+        &::-webkit-scrollbar {
+            width: var(--unit);
+            height: var(--unit);
+            background-color: var(--mv-color-dark);
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: var(--mv-color-danger);
+            border-radius: var(--unit);
+        }
+    }
+}

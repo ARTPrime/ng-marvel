@@ -1,0 +1,21 @@
+:host {
+    display: grid;
+    grid-template-areas: 'characters comics';
+    grid-template-columns: 0.4fr 1fr;
+    height: calc(100% - var(--unit-xxxl));
+    mv-gallery {
+        grid-area: characters;
+        height: 100%;
+    }
+    div {
+        grid-area: comics;
+        border-left: 1px solid var(--mv-color-dark-tint);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        h1 {
+            animation: fadeInUp;
+            animation-duration: 300ms;
+        }
+    }
+}

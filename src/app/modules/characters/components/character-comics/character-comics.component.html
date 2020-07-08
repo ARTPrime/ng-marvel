@@ -1,1 +1,13 @@
-
+<!-- <mv-gallery [items]="characters$ | async" [itemTemplate]="imgTemplate" [itemSize]="galleryItemSize">
+    <ng-template #imgTemplate let-item>
+        <figure
+            mvGalleryItem
+            [item]="item"
+            [itemSize]="galleryItemSize"
+            [selected]="selectedCharacter ? selectedCharacter.id === item.id : false"
+            (click)="onItemClick(item)"
+        >
+            <figcaption>{{ item.name }}</figcaption>
+        </figure>
+    </ng-template>
+</mv-gallery> -->

@@ -1,0 +1,17 @@
+:host {
+    display: grid;
+    grid-template-areas: 'characters detail';
+    grid-template-columns: 1fr 0.3fr;
+    height: calc(100% - var(--unit-xxxl));
+    mv-gallery {
+        grid-area: characters;
+    }
+    section {
+        grid-area: detail;
+        border-left: 1px solid var(--mv-color-dark-tint);
+        display: flex;
+    }
+    mv-loader {
+        margin: var(--unit-xxl) auto;
+    }
+}

@@ -1,7 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
 import {
-    getCharacater,
     getCharacaters,
     getCharacterComics,
     getCharacterStories,
@@ -23,10 +22,6 @@ const reducer = createReducer(
         ...state,
         characters: state.characters ? { ...state.characters, ...appendCharacters(state, characters) } : characters,
         loadingCharacters: false
-    })),
-    on(getCharacater, (state: CharactersState) => ({
-        ...state,
-        loadingCharacter: true
     })),
     on(setCharacater, (state: CharactersState, { character }) => ({
         ...state,

@@ -15,11 +15,10 @@ export class CharactersService {
             params: new HttpParams().set('offset', offset ? offset.toString() : '0')
         });
     }
-    public getCharacter(id: number): Observable<MarvelCollection> {
-        return this.http.get<MarvelCollection>(ENDPOINTS.character(id));
-    }
-    public getCharacterComics(id: number): Observable<MarvelCollection> {
-        return this.http.get<MarvelCollection>(ENDPOINTS.characterComics(id));
+    public getCharacterComics(id: number, offset: number): Observable<MarvelCollection> {
+        return this.http.get<MarvelCollection>(ENDPOINTS.characterComics(id), {
+            params: new HttpParams().set('offset', offset ? offset.toString() : '0')
+        });
     }
     public getCharacterStories(id: number): Observable<MarvelCollection> {
         return this.http.get<MarvelCollection>(ENDPOINTS.characterStories(id));

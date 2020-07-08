@@ -3,23 +3,24 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
+import { MetaReducer, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { MvSharedModule } from '@shared/mv-shared.module';
 import { storeLogger } from 'ngrx-store-logger';
 
-import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MarvelInterceptor } from './core/interceptors/marvel-interceptor';
 import { AppReadyService } from './core/services/app-ready/app-ready.service';
+import { initStateFromLocalStorage } from './core/store/reducers/init-state-from-local-storage.reducer';
 import { navigationReducer } from './core/store/reducers/navigation.reducers';
+import { AppState } from './core/store/state/app.state';
 
 export function logger(reducer: any): any {
     return storeLogger()(reducer);
 }
 
-const metaReducers = environment.production ? [] : [logger];
+const metaReducers: MetaReducer<AppState, any>[] = [initStateFromLocalStorage, logger];
 
 @NgModule({
     declarations: [AppComponent],

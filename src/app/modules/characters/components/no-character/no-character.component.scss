@@ -1,0 +1,12 @@
+:host {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: var(--unit-lg);
+    h1 {
+        animation: fadeInDown;
+        animation-duration: 300ms;
+        text-align: center;
+    }
+}

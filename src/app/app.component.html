@@ -53,9 +53,7 @@
         [color]="(navToggle$ | async).color"
         [toggle]="(navToggle$ | async).toggle"
     ></button>
-    <!-- <div class="mv-toolbar">
-        <mv-loader [color]="'mv-danger'" [size]="'mv-loader--xs'"></mv-loader>
-    </div> -->
+    <div class="mv-toolbar"></div>
     <router-outlet></router-outlet>
     <div mvOverlay mvNavigationOverlay [color]="'mv-warning'">
         <mv-loader [color]="'mv-dark'" [size]="'mv-loader--big'"></mv-loader>

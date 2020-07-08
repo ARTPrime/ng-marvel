@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, switchMap } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 
 import { StoriesService } from '../../services/api/stories/stories.service';
+import { LocalStorageService } from '../../services/local-storage/local-storage.service';
 import {
     getStories,
     getStoryCharacters,
@@ -11,9 +13,23 @@ import {
     setStoryCharacters,
     setStoryComics
 } from '../actions/stories.actions';
+import { selectStoriesState } from '../selectors/stories.selectors';
 
 @Injectable()
 export class StoriesEffects {
+    public persistSites$ = createEffect(
+        () =>
+            this.actions$.pipe(
+                ofType(setStoryComics, setStoryCharacters, setStories),
+                withLatestFrom(this.store.select(selectStoriesState)),
+                filter(([, comics]) => !!comics),
+                tap(([, comics]) => this.localStorageService.setItem('Comics', comics))
+            ),
+        {
+            dispatch: false
+        }
+    );
+
     public loadStories$ = createEffect(() =>
         this.actions$.pipe(
             ofType(getStories),
@@ -38,5 +54,10 @@ export class StoriesEffects {
         )
     );
 
-    constructor(private actions$: Actions, private storiesService: StoriesService) {}
+    constructor(
+        private actions$: Actions,
+        private storiesService: StoriesService,
+        private store: Store,
+        private localStorageService: LocalStorageService
+    ) {}
 }
