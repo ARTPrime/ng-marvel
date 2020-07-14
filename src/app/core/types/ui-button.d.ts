@@ -8,6 +8,7 @@ declare type UiButton = {
     iconName?: UiIcon;
     text?: string;
     routerLink?: string[];
+    value?: any;
 };
 
 declare type UiMenuButton = UiButton & { toggle: boolean };

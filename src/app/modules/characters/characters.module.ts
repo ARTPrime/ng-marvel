@@ -1,10 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
 import { MvSharedModule } from '@shared/mv-shared.module';
 import { CharactersEffects } from 'src/app/core/store/effects/characters.effects';
-import { charactersReducer } from 'src/app/core/store/reducers/characters.reducers';
 
 import { CharactersRoutingModule } from './characters-routing.module';
 import { CharactersComponent } from './characters.component';
@@ -21,12 +19,6 @@ import { NoCharacterComponent } from './components/no-character/no-character.com
         NoCharacterComponent,
         CharacterDetailComponent
     ],
-    imports: [
-        CommonModule,
-        StoreModule.forFeature('characters', charactersReducer),
-        EffectsModule.forFeature([CharactersEffects]),
-        CharactersRoutingModule,
-        MvSharedModule
-    ]
+    imports: [CommonModule, EffectsModule.forFeature([CharactersEffects]), CharactersRoutingModule, MvSharedModule]
 })
 export class CharactersModule {}

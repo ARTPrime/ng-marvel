@@ -1,4 +1,10 @@
-<mv-gallery [items]="characters$ | async" [itemTemplate]="imgTemplate" [itemSize]="galleryItemSize">
+<mv-gallery
+    [items]="characters$ | async"
+    [offset]="initialOffset"
+    [itemTemplate]="imgTemplate"
+    [itemSize]="galleryItemSize"
+    [selectedItem]="selectedCharacter"
+>
     <ng-template #imgTemplate let-item>
         <figure
             mvGalleryItem
@@ -11,7 +17,18 @@
         </figure>
     </ng-template>
 </mv-gallery>
-<mv-loader *ngIf="charactersLoading" [size]="'mv-loader--big'" [color]="'mv-danger'"></mv-loader>
+<section class="letter--buttons">
+    <button
+        mvButton
+        color="mv-dark-tint"
+        (click)="onAlphabetClick(char)"
+        fill="mv-transparent"
+        size="mv-button-small"
+        *ngFor="let char of alphabet"
+    >
+        {{ char | uppercase }}
+    </button>
+</section>
 <section>
     <router-outlet></router-outlet>
 </section>

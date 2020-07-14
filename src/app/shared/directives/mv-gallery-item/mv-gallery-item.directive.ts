@@ -17,7 +17,6 @@ export class MvGalleryItemDirective implements OnInit, OnChanges {
     private noImageColors = [
         '--mv-color-primary',
         '--mv-color-secondary',
-        '--mv-color-danger',
         '--mv-color-warning',
         '--mv-color-success',
         '--mv-color-dark-tint'

@@ -14,9 +14,10 @@ export const selectLoadingComicharacters = createSelector(
 );
 
 export const selectComicsStories = createSelector(selectComicsState, (state: ComicsState) => state.comicStories);
-export const selectLoadingComicsStories = createSelector(
+export const selectLoadingComicStories = createSelector(
     selectComicsState,
     (state: ComicsState) => state.loadingComicStories
 );
 
 export const selectComic = createSelector(selectComicsState, (state: ComicsState) => state.comic);
+export const selectLoadingComic = createSelector(selectComicsState, (state: ComicsState) => state.loadingComic);

@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CharacterComicsGuard } from 'src/app/core/guards/characters/character-comics/character-comics.guard';
+import { CharacterSetGuard } from 'src/app/core/guards/characters/character-set/character-set.guard';
+import { CharacterStoriesGuard } from 'src/app/core/guards/characters/character-stories/character-stories.guard';
 
 import { CharactersComponent } from './characters.component';
 import { CharacterComicsComponent } from './components/character-comics/character-comics.component';
@@ -14,15 +17,38 @@ const routes: Routes = [
         children: [
             {
                 path: 'view/:id',
-                component: CharacterDetailComponent
+                component: CharacterDetailComponent,
+                resolve: [CharacterSetGuard]
             },
             {
-                path: 'comics',
-                component: CharacterComicsComponent
+                path: '',
+                component: NoCharacterComponent
+            }
+        ]
+    },
+    {
+        path: 'comics',
+        component: CharactersComponent,
+        children: [
+            {
+                path: 'view/:id',
+                component: CharacterComicsComponent,
+                resolve: [CharacterComicsGuard]
             },
             {
-                path: 'stories',
-                component: CharacterStoriesComponent
+                path: '',
+                component: NoCharacterComponent
+            }
+        ]
+    },
+    {
+        path: 'stories',
+        component: CharactersComponent,
+        children: [
+            {
+                path: 'view/:id',
+                component: CharacterStoriesComponent,
+                resolve: [CharacterStoriesGuard]
             },
             {
                 path: '',

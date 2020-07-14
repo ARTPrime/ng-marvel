@@ -1,1 +1,13 @@
-
+<mv-gallery
+    *ngIf="comicStories$ | async"
+    [offset]="initialOffset"
+    [items]="comicStories$ | async"
+    [itemTemplate]="imgTemplate"
+    [itemSize]="galleryItemSize"
+>
+    <ng-template #imgTemplate let-item>
+        <figure mvGalleryItem [item]="item" [itemSize]="galleryItemSize">
+            <figcaption>{{ item.title }}</figcaption>
+        </figure>
+    </ng-template>
+</mv-gallery>

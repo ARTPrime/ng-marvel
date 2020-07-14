@@ -16,8 +16,8 @@ body {
     text-align: center;
     z-index: 7000;
     opacity: 1;
-    transition: all linear 350ms;
-    -webkit-transition: all linear 350ms;
+    transition: all linear 500ms;
+    -webkit-transition: all linear 500ms;
 }
 
 .page-loader.loaded {

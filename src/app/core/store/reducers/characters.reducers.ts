@@ -1,6 +1,9 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
 import {
+    appendCharacterComics,
+    appendCharacters,
+    getCharacater,
     getCharacaters,
     getCharacterComics,
     getCharacterStories,
@@ -10,7 +13,7 @@ import {
     setCharacterStories
 } from '../actions/characters.actions';
 import { CharactersState, defaultCharacterState } from '../state/characters.state';
-import { appendCharacters } from './functions/characters.functions';
+import { appendCharacterData } from './functions/characters.functions';
 
 const reducer = createReducer(
     defaultCharacterState,
@@ -18,9 +21,19 @@ const reducer = createReducer(
         ...state,
         loadingCharacters: true
     })),
-    on(setCharacaters, (state: CharactersState, { characters }) => ({
+    on(getCharacater, (state: CharactersState) => ({
         ...state,
-        characters: state.characters ? { ...state.characters, ...appendCharacters(state, characters) } : characters,
+        loadingCharacter: true
+    })),
+    on(appendCharacters, (state: CharactersState) => ({
+        ...state,
+        loadingCharacters: true
+    })),
+    on(setCharacaters, (state: CharactersState, { characters, append }) => ({
+        ...state,
+        characters: append
+            ? { ...state.characters, ...appendCharacterData(state, characters, 'characters') }
+            : characters,
         loadingCharacters: false
     })),
     on(setCharacater, (state: CharactersState, { character }) => ({
@@ -32,17 +45,27 @@ const reducer = createReducer(
         ...state,
         loadingCharacterComics: true
     })),
-    on(setCharacterComics, (state: CharactersState, { characterComics }) => ({
+    on(appendCharacterComics, (state: CharactersState) => ({
         ...state,
-        characterComics
+        loadingCharacterComics: true
+    })),
+    on(setCharacterComics, (state: CharactersState, { characterComics, append }) => ({
+        ...state,
+        characterComics: append
+            ? { ...state.characterComics, ...appendCharacterData(state, characterComics, 'characterComics') }
+            : characterComics,
+        loadingCharacterComics: false
     })),
     on(getCharacterStories, (state: CharactersState) => ({
         ...state,
         loadingCharacterStories: true
     })),
-    on(setCharacterStories, (state: CharactersState, { characterStories }) => ({
+    on(setCharacterStories, (state: CharactersState, { characterStories, append }) => ({
         ...state,
-        characterStories
+        characterStories: append
+            ? { ...state.characterComics, ...appendCharacterData(state, characterStories, 'characterStories') }
+            : characterStories,
+        loadingCharacterStories: false
     }))
 );
 

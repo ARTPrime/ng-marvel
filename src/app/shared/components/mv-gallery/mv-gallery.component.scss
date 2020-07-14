@@ -1,0 +1,22 @@
+:host {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 250px);
+    width: 100%;
+    overflow-y: auto;
+    &.fit--height {
+        height: fit-content;
+    }
+    &::-webkit-scrollbar-track {
+        background-color: var(--mv-color-dark-shade);
+    }
+    &::-webkit-scrollbar {
+        width: var(--unit);
+        height: var(--unit);
+        background-color: var(--mv-color-dark);
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--mv-color-danger);
+        border-radius: var(--unit);
+    }
+}

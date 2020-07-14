@@ -13,9 +13,9 @@
     <article>
         <h2>Comics</h2>
         <ng-container *ngIf="selectedCharacter.comics.items.length > 0; else noComicsTemplate">
-            <a *ngFor="let item of selectedCharacter.comics.items | slice: 0:8">
+            <span *ngFor="let item of selectedCharacter.comics.items | slice: 0:5">
                 {{ item.name }}
-            </a>
+            </span>
         </ng-container>
         <ng-template #noComicsTemplate>
             No comics available for this character
@@ -24,9 +24,9 @@
     <article>
         <h2>Stories</h2>
         <ng-container *ngIf="selectedCharacter.stories.items.length > 0; else noStoriesTemplate">
-            <a *ngFor="let item of selectedCharacter.comics.items | slice: 0:8">
+            <span *ngFor="let item of selectedCharacter.comics.items | slice: 0:5">
                 {{ item.name }}
-            </a>
+            </span>
         </ng-container>
         <ng-template #noStoriesTemplate>
             No stories available for this character

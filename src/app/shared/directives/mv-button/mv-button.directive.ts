@@ -1,14 +1,27 @@
-import { ContentChild, Directive, ElementRef, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import {
+    ContentChild,
+    Directive,
+    ElementRef,
+    EventEmitter,
+    HostListener,
+    Input,
+    OnChanges,
+    OnInit,
+    Output,
+    SimpleChanges
+} from '@angular/core';
+import { UrlTree } from '@angular/router';
 
 import { MvDropdownIconDirective } from '../mv-dropdown-icon/mv-dropdown-icon.directive';
 
 @Directive({
     selector: '[mvButton]'
 })
-export class MvButtonDirective implements OnInit {
+export class MvButtonDirective implements OnInit, OnChanges {
     @Input() public fill: UiFill;
     @Input() public color: UiColor;
     @Input() public size: UiButtonSmall;
+    @Input() public routerLink: UrlTree | string[];
     @Output() public buttonClick: EventEmitter<any> = new EventEmitter();
     @ContentChild(MvDropdownIconDirective) public icon: MvDropdownIconDirective;
 
@@ -20,6 +33,14 @@ export class MvButtonDirective implements OnInit {
     }
 
     constructor(public element: ElementRef<HTMLElement>) {}
+
+    public ngOnChanges(changes: SimpleChanges): void {
+        const key = 'color';
+        if (changes[key] && !changes[key].isFirstChange()) {
+            this.element.nativeElement.classList.remove(changes[key].previousValue);
+            this.element.nativeElement.classList.add(changes[key].currentValue);
+        }
+    }
 
     public ngOnInit() {
         const nativeElement = this.element.nativeElement;

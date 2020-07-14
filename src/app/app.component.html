@@ -2,28 +2,13 @@
     <mv-dropdown-menu [display]="'column'" [items]="navItems$ | async" [itemTemplate]="dropdownItem">
         <ng-template #dropdownItem let-item>
             <div mvDropdownItem [item]="item">
-                <ng-container *ngIf="item.children; else noChildren">
-                    <button class="mv-dropdown-item--header" mvButton fill="mv-outline" color="mv-light">
-                        <span>
-                            {{ item.button.text }}
-                        </span>
-                        <i mvDropdownIcon mvIcon animation="mv-flip" name="mv-chevron-down"></i>
-                    </button>
-                </ng-container>
-                <ng-template #noChildren>
-                    <button
-                        [routerLink]="item.routerLink"
-                        class="mv-dropdown-item--header"
-                        mvButton
-                        fill="mv-outline"
-                        color="mv-light"
-                    >
-                        <span>
-                            {{ item.text }}
-                        </span>
-                    </button>
-                </ng-template>
-                <div mvDropdownSubmenu *ngIf="item.children">
+                <button class="mv-dropdown-item--header" mvButton fill="mv-outline" color="mv-light">
+                    <span>
+                        {{ item.button.text }}
+                    </span>
+                    <i *ngIf="item.children" mvDropdownIcon mvIcon animation="mv-flip" name="mv-chevron-down"> </i>
+                </button>
+                <div mvDropdownSubmenu *ngIf="item.children" [routerUrl]="routerUrl">
                     <ng-container *ngFor="let child of item.children">
                         <button
                             [routerLink]="child.routerLink"
@@ -31,6 +16,8 @@
                             mvButton
                             fill="mv-solid"
                             color="mv-dark"
+                            [routerLinkActive]="'mv-danger'"
+                            [routerLinkActiveOptions]="{ exact: true }"
                         >
                             <span>
                                 {{ child.text }}
@@ -44,16 +31,31 @@
     <img class="marvel_logo" src="/assets/images/marvel.svg" alt="marvel_logo" />
 </nav>
 <main>
-    <button
-        (click)="onMenuButtonClick()"
-        mvButton
-        mvMenuButton
-        *ngIf="navToggle$ | async"
-        [fill]="(navToggle$ | async).fill"
-        [color]="(navToggle$ | async).color"
-        [toggle]="(navToggle$ | async).toggle"
-    ></button>
-    <div class="mv-toolbar"></div>
+    <mv-toolbar
+        [navButtonTemplate]="navButton"
+        [currentParentLocation]="toolbarLocationUrl$ | async"
+        [loading]="toolbarLoader$ | async"
+        [itemLocation]="itemRoute$ | async"
+        [filtersTemplate]="filters"
+    >
+        <ng-template #navButton>
+            <button
+                (click)="onMenuButtonClick()"
+                mvButton
+                mvMenuButton
+                *ngIf="navToggle$ | async"
+                [fill]="(navToggle$ | async).fill"
+                [color]="(navToggle$ | async).color"
+                [toggle]="(navToggle$ | async).toggle"
+            ></button>
+        </ng-template>
+        <ng-template #filters>
+            <mv-filter-searchbox
+                [filterOptions]="filterOptions$ | async"
+                (filterChanged)="onFilterSelected($event)"
+            ></mv-filter-searchbox>
+        </ng-template>
+    </mv-toolbar>
     <router-outlet></router-outlet>
     <div mvOverlay mvNavigationOverlay [color]="'mv-warning'">
         <mv-loader [color]="'mv-dark'" [size]="'mv-loader--big'"></mv-loader>

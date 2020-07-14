@@ -15,10 +15,14 @@ export class StoriesService {
             params: new HttpParams().set('offset', offset ? offset.toString() : '0')
         });
     }
-    public getStoryCharcaters(id: number): Observable<any> {
-        return this.http.get(ENDPOINTS.storyCharacters(id));
+    public getStoryCharcaters(id: number, offset?: number): Observable<any> {
+        return this.http.get(ENDPOINTS.storyCharacters(id), {
+            params: new HttpParams().set('offset', offset ? offset.toString() : '0')
+        });
     }
-    public getStoryComics(id: number): Observable<any> {
-        return this.http.get(ENDPOINTS.storyComics(id));
+    public getStoryComics(id: number, offset?: number): Observable<any> {
+        return this.http.get(ENDPOINTS.storyComics(id), {
+            params: new HttpParams().set('offset', offset ? offset.toString() : '0')
+        });
     }
 }

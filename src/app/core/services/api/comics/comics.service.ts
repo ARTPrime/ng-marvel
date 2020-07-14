@@ -10,18 +10,35 @@ import { ENDPOINTS } from '../api.endpoints';
 export class ComicsService {
     constructor(private http: HttpClient) {}
 
-    public getComics(offset: number): Observable<any> {
-        return this.http.get(ENDPOINTS.comics, {
+    public getComics(offset?: number, filter?: { filter: string; value: string }): Observable<MarvelCollection> {
+        return this.http.get<MarvelCollection>(ENDPOINTS.comics, {
+            params: !filter
+                ? new HttpParams().set('offset', offset ? offset.toString() : '0')
+                : new HttpParams()
+                      .set('offset', offset ? offset.toString() : '0')
+                      .set(
+                          filter.filter === 'comic'
+                              ? 'titleStartsWith'
+                              : filter.filter === 'character'
+                              ? 'characters'
+                              : filter.filter === 'story'
+                              ? 'stories'
+                              : '',
+                          filter.value
+                      )
+        });
+    }
+    public getComic(id: number): Observable<MarvelCollection> {
+        return this.http.get<MarvelCollection>(ENDPOINTS.comic(id));
+    }
+    public getComicCharcaters(id: number, offset?: number): Observable<MarvelCollection> {
+        return this.http.get<MarvelCollection>(ENDPOINTS.comicCharacters(id), {
             params: new HttpParams().set('offset', offset ? offset.toString() : '0')
         });
     }
-    public getComic(id: number): Observable<any> {
-        return this.http.get(ENDPOINTS.comic(id));
-    }
-    public getComicCharcaters(id: number): Observable<any> {
-        return this.http.get(ENDPOINTS.comicCharacters(id));
-    }
-    public getComicStories(id: number): Observable<any> {
-        return this.http.get(ENDPOINTS.comicStories(id));
+    public getComicStories(id: number, offset?: number): Observable<MarvelCollection> {
+        return this.http.get<MarvelCollection>(ENDPOINTS.comicStories(id), {
+            params: new HttpParams().set('offset', offset ? offset.toString() : '0')
+        });
     }
 }

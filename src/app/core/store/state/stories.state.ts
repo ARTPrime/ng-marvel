@@ -1,4 +1,5 @@
 export interface StoriesState {
+    story: MarvelStory;
     stories: MarvelCollection;
     storyComics: MarvelCollection;
     storyCharacters: MarvelCollection;
@@ -12,6 +13,7 @@ export const defaultStoriesState: StoriesState = {
     stories: null,
     storyComics: null,
     storyCharacters: null,
+    story: null,
 
     loadingStories: false,
     loadingStoryCharacters: false,

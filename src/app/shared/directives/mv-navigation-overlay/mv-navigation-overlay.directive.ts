@@ -8,7 +8,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class MvNavigationOverlayDirective implements OnInit, OnDestroy {
     @HostBinding('class.mv-overlay--show') show: boolean;
-    destroy$: Subject<boolean> = new Subject<boolean>();
+    private destroy$: Subject<boolean> = new Subject<boolean>();
     constructor(private router: Router) {}
 
     ngOnInit() {

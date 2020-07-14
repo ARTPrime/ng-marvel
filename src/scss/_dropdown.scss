@@ -14,21 +14,35 @@
         }
     }
     .mv-dropdown--item {
-        overflow: hidden;
         button {
-            justify-content: left !important;
             text-transform: uppercase;
             &.mv-dropdown-item--header {
                 height: 54px !important;
-                font-weight: 600;
             }
         }
-        .mv-dropdown--submenu {
-            display: block;
-            transition: max-height 300ms ease-in-out;
+    }
+}
+
+.mv-dropdown--item {
+    button {
+        justify-content: left !important;
+        &.mv-dropdown-item--header {
+            font-weight: 600;
+        }
+    }
+    .mv-dropdown--submenu {
+        display: block;
+        transition: max-height 300ms ease-in-out;
+        button {
+            font-size: var(--unit-md) !important;
+            padding-left: var(--unit-xl);
+            display: none;
+            animation: fadeInDown;
+            animation-duration: 200ms;
+        }
+        &.mv-submenu--expand {
             button {
-                font-size: var(--unit-md) !important;
-                padding-left: var(--unit-xl);
+                display: inline-flex;
             }
         }
     }

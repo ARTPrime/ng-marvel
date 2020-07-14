@@ -1,15 +1,19 @@
 import { ComicsState } from '../../state/comics.state';
 
-export function appendComics(state: ComicsState, collection: MarvelCollection): Partial<MarvelCollection> {
-    const currentComics = state.comics.data.results;
+export function appendComicData(
+    state: ComicsState,
+    collection: MarvelCollection,
+    slice: string
+): Partial<MarvelCollection> {
+    const currentData = state[slice].data.results;
     const data = collection.data;
     const newData: Partial<MarvelCollection> = {
         data: {
-            count: data.count,
+            count: data.count + state[slice].data.count,
             limit: data.limit,
             offset: data.offset,
             total: data.total,
-            results: currentComics.concat(data.results)
+            results: currentData.concat(data.results)
         }
     };
 

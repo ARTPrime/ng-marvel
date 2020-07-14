@@ -15,6 +15,9 @@
     &.mv-dark {
         color: var(--mv-color-dark);
     }
+    &.mv-dark-tint {
+        color: var(--mv-color-dark-tint);
+    }
     &.mv-light {
         color: var(--mv-color-light);
     }
@@ -72,15 +75,6 @@
         color: var(--mv-color-warning);
     }
 }
-.mv-primary {
-    background: var(--mv-color-primary);
-}
-.mv-secondary {
-    background: var(--mv-color-secondary);
-}
-.mv-tertiary {
-    background: var(--mv-color-tertiary);
-}
 .mv-dark {
     background: var(--mv-color-dark);
 }
@@ -89,6 +83,15 @@
 }
 .mv-dark-shade {
     background: var(--mv-color-dark-shade);
+}
+.mv-primary {
+    background: var(--mv-color-primary);
+}
+.mv-secondary {
+    background: var(--mv-color-secondary);
+}
+.mv-tertiary {
+    background: var(--mv-color-tertiary);
 }
 .mv-light {
     background: var(--mv-color-light);
@@ -101,7 +104,7 @@
 .mv-danger {
     background: var(--mv-color-danger);
     &:hover {
-        background: var(--mv-color-danger-shade);
+        color: var(--mv-color-warning);
     }
 }
 .mv-warning {

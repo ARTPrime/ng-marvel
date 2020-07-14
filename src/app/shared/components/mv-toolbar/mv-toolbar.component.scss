@@ -1,0 +1,22 @@
+:host {
+    display: flex;
+    flex-direction: row;
+    height: var(--unit-xxxl);
+    align-items: center;
+    line-height: initial;
+    background: var(--mv-color-dark-shade);
+    .router-state {
+        color: var(--mv-color-dark-tint);
+        margin: 0 var(--unit-lg) 0 var(--unit);
+        font-weight: 600;
+        span {
+            animation: fadeInLeft;
+            animation-duration: 300ms;
+        }
+    }
+    mv-loader {
+        margin: 0 var(--unit);
+        animation: fadeInLeft;
+        animation-duration: 300ms;
+    }
+}

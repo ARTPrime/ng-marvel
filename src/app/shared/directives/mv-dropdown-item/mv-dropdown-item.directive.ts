@@ -11,14 +11,11 @@ export class MvDropdownItemDirective implements OnInit, AfterViewInit {
     @ContentChild(MvButtonDirective) public button: MvButtonDirective;
     @ContentChild(MvDropdownSubmenuDirective) public submenu: MvDropdownSubmenuDirective;
     @HostBinding('class.mv-dropdown--item') class = true;
-    @HostBinding('class.mv-dropdown--item-expandable') isExpandable: boolean;
     @Input() item: UiButton | UiDropdownItem;
 
     constructor() {}
 
-    public ngOnInit(): void {
-        this.isExpandable = (this.item as UiDropdownItem).children ? true : false;
-    }
+    public ngOnInit(): void {}
     public ngAfterViewInit(): void {
         this.button.buttonClick.pipe(filter(() => !!this.submenu)).subscribe(() => this.submenu.toggle());
     }

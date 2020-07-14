@@ -1,0 +1,7 @@
+<ng-container [ngTemplateOutlet]="navButtonTemplate"></ng-container>
+<mv-loader *ngIf="loading" size="mv-loader--xs" color="mv-danger"></mv-loader>
+<span class="router-state">
+    {{ currentParentLocation }}
+    <span *ngIf="itemLocation">{{ itemLocation | slice: 0:30 }}</span>
+</span>
+<ng-container [ngTemplateOutlet]="filtersTemplate"></ng-container>

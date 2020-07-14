@@ -6,6 +6,8 @@ export const selectStoriesState: MemoizedSelector<object, StoriesState> = create
     'stories'
 );
 
+export const selectStory = createSelector(selectStoriesState, (state: StoriesState) => state.story);
+
 export const selectStories = createSelector(selectStoriesState, (state: StoriesState) => state.stories);
 export const selectLoadingStories = createSelector(selectStoriesState, (state: StoriesState) => state.loadingStories);
 
@@ -15,8 +17,8 @@ export const selectLoadingStoryharacters = createSelector(
     (state: StoriesState) => state.loadingStoryCharacters
 );
 
-export const selectStoriesComics = createSelector(selectStoriesState, (state: StoriesState) => state.storyComics);
-export const selectLoadingStoriesStories = createSelector(
+export const selectStoryComics = createSelector(selectStoriesState, (state: StoriesState) => state.storyComics);
+export const selectLoadingStoryComics = createSelector(
     selectStoriesState,
     (state: StoriesState) => state.loadingStoryComics
 );

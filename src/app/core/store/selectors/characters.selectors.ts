@@ -14,6 +14,16 @@ export const selectLoadingCharacters = createSelector(
 
 export const selectCharacter = createSelector(selectCharactersState, (state: CharactersState) => state.character);
 
+export const selectLoadingCharacter = createSelector(
+    selectCharactersState,
+    (state: CharactersState) => state.loadingCharacter
+);
+
+export const selectCharacterById = (id: number) =>
+    createSelector(selectCharactersState, (state: CharactersState) =>
+        state.characters.data.results.find(c => c.id === id)
+    );
+
 export const selectCharacterComics = createSelector(
     selectCharactersState,
     (state: CharactersState) => state.characterComics

@@ -110,3 +110,8 @@ declare type ImageSize =
     | ImageSizeLandscapeXLarge
     | ImageSizeLandscapeAmazing
     | ImageSizeLandscapeIncredible;
+
+declare type UiLoaderSmall = 'mv-loader--small';
+declare type UiLoaderBig = 'mv-loader--big';
+declare type UiLoaderTiny = 'mv-loader--xs';
+declare type UiLoaderSize = UiLoaderSmall | UiLoaderTiny | UiLoaderBig;

@@ -1,0 +1,46 @@
+<ng-container *ngIf="filterOptions">
+    <div class="filterbox--dropdown" mvDropdownItem [item]="filterOptions">
+        <button class="mv-dropdown-item--header" mvButton fill="mv-transparent" color="mv-dark-tint">
+            <span>
+                {{ filterOptions.button.text }}
+            </span>
+            <i mvDropdownIcon mvIcon animation="mv-flip" name="mv-chevron-down"> </i>
+        </button>
+        <div mvDropdownSubmenu class="filterbox--submenu">
+            <ng-container *ngFor="let child of filterOptions.children">
+                <button
+                    (click)="onFilterClick(child)"
+                    class="mv-submenu--button"
+                    mvButton
+                    fill="mv-solid"
+                    [value]="child.value"
+                    color="mv-dark"
+                >
+                    <span>
+                        {{ child.text }}
+                    </span>
+                </button>
+            </ng-container>
+        </div>
+    </div>
+</ng-container>
+<input
+    #input
+    class="mv-input"
+    [type]="selectedFilterOption === 'character' ? 'text' : 'number'"
+    [placeholder]="placeholder ? placeholder : 'Select filter...'"
+    [disabled]="!selectedFilterOption"
+    [(ngModel)]="inputValue"
+/>
+<div class="searchbox--buttons">
+    <button
+        mvButton
+        color="mv-success"
+        fill="mv-transparent"
+        (click)="onSearch(inputValue)"
+        [disabled]="!selectedFilterOption"
+    >
+        Search
+    </button>
+    <button mvButton color="mv-danger" fill="mv-transparent" (click)="onReset()">Reset</button>
+</div>

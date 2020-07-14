@@ -1,3 +1,33 @@
-mv-gallery {
-    height: calc(100% - 40px);
+:host {
+    display: grid;
+    grid-template-areas: 'comics alphabet detail';
+    grid-template-columns: 1fr 40px 300px;
+    height: calc(100% - var(--unit-xxxl));
+    &.second--gallery {
+        grid-template-columns: 1fr 40px 1fr;
+    }
+    mv-gallery {
+        grid-area: comics;
+    }
+    .letter--buttons {
+        grid-area: alphabet;
+        display: flex;
+        align-items: center;
+        width: var(--unit-xxxl);
+        height: 100%;
+        flex-direction: column;
+        border: solid var(--mv-color-dark-shade);
+        border-width: 0 2px;
+        button {
+            font-weight: 600;
+            height: 36px;
+        }
+    }
+    section {
+        grid-area: detail;
+        display: flex;
+    }
+    mv-loader {
+        margin: var(--unit-xxl) auto;
+    }
 }

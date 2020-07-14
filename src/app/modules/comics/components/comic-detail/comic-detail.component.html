@@ -1,0 +1,35 @@
+<header [style.background-image]="imageClass">
+    <h1>{{ selectedComic.title }}</h1>
+</header>
+<section>
+    <article class="character-description">
+        <ng-container *ngIf="selectedComic.description !== ''; else noDescription">
+            {{ selectedComic.description }}
+        </ng-container>
+        <ng-template #noDescription>
+            No description available for this comic...sorry
+        </ng-template>
+    </article>
+    <article>
+        <h2>Comics</h2>
+        <ng-container *ngIf="selectedComic.characters.items.length > 0; else noComicsTemplate">
+            <span *ngFor="let item of selectedComic.characters.items | slice: 0:5">
+                {{ item.name }}
+            </span>
+        </ng-container>
+        <ng-template #noComicsTemplate>
+            No characters available for this comic
+        </ng-template>
+    </article>
+    <article>
+        <h2>Stories</h2>
+        <ng-container *ngIf="selectedComic.stories.items.length > 0; else noStoriesTemplate">
+            <span *ngFor="let item of selectedComic.stories.items | slice: 0:5">
+                {{ item.name }}
+            </span>
+        </ng-container>
+        <ng-template #noStoriesTemplate>
+            No stories available for this comic
+        </ng-template>
+    </article>
+</section>

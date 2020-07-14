@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { CharactersLoadGuard } from './core/guards/characters-load/characters-load.guard';
-import { ComicsLoadGuard } from './core/guards/comics-load/comics-load.guard';
-import { StoriesLoadGuard } from './core/guards/stories-load/stories-load.guard';
+import { CharactersLoadGuard } from './core/guards/characters/characters-load/characters-load.guard';
+import { ComicsLoadGuard } from './core/guards/comics/comics-load/comics-load.guard';
+import { StoriesLoadGuard } from './core/guards/stories/stories-load/stories-load.guard';
 
 const routes: Routes = [
     {

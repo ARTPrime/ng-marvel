@@ -1,7 +1,22 @@
-<mv-gallery [items]="stories$ | async" [itemTemplate]="imgTemplate" [itemSize]="galleryItemSize">
+<mv-gallery
+    [items]="stories$ | async"
+    [offset]="initialOffset"
+    [itemTemplate]="imgTemplate"
+    [itemSize]="galleryItemSize"
+    [selectedItem]="selectedStory"
+>
     <ng-template #imgTemplate let-item>
-        <figure mvGalleryItem [item]="item" [itemSize]="galleryItemSize">
+        <figure
+            mvGalleryItem
+            [item]="item"
+            [selected]="selectedStory ? selectedStory.id === item.id : false"
+            [itemSize]="galleryItemSize"
+            (click)="onItemClick(item)"
+        >
             <figcaption>{{ item.title }}</figcaption>
         </figure>
     </ng-template>
 </mv-gallery>
+<section>
+    <router-outlet></router-outlet>
+</section>

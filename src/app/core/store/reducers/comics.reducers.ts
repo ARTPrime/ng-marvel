@@ -1,6 +1,10 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
 import {
+    appendComicCharacters,
+    appendComics,
+    appendComicStories,
+    getComic,
     getComicCharacters,
     getComics,
     getComicStories,
@@ -10,17 +14,25 @@ import {
     setComicStories
 } from '../actions/comics.actions';
 import { ComicsState, defaultComicsState } from '../state/comics.state';
-import { appendComics } from './functions/comics.functions';
+import { appendComicData } from './functions/comics.functions';
 
 const reducer = createReducer(
     defaultComicsState,
+    on(getComic, (state: ComicsState) => ({
+        ...state,
+        loadingComic: true
+    })),
     on(getComics, (state: ComicsState) => ({
         ...state,
         loadingComics: true
     })),
-    on(setComics, (state: ComicsState, { comics }) => ({
+    on(appendComics, (state: ComicsState) => ({
         ...state,
-        comics: state.comics ? { ...state.comics, ...appendComics(state, comics) } : comics,
+        loadingComics: true
+    })),
+    on(setComics, (state: ComicsState, { comics, append }) => ({
+        ...state,
+        comics: append ? { ...state.comics, ...appendComicData(state, comics, 'comics') } : comics,
         loadingComics: false
     })),
     on(setComic, (state: ComicsState, { comic }) => ({
@@ -32,18 +44,30 @@ const reducer = createReducer(
         ...state,
         loadingComicCharacters: true
     })),
-    on(setComicCharacters, (state: ComicsState, { comicCharacters }) => ({
+    on(appendComicCharacters, (state: ComicsState) => ({
         ...state,
-        comicCharacters,
+        loadingComicCharacters: true
+    })),
+    on(setComicCharacters, (state: ComicsState, { comicCharacters, append }) => ({
+        ...state,
+        comicCharacters: append
+            ? { ...state.comics, ...appendComicData(state, comicCharacters, 'comicCharacters') }
+            : comicCharacters,
         loadingComicCharacters: false
     })),
     on(getComicStories, (state: ComicsState) => ({
         ...state,
         loadingComicStories: true
     })),
-    on(setComicStories, (state: ComicsState, { comicStories }) => ({
+    on(appendComicStories, (state: ComicsState) => ({
         ...state,
-        comicStories,
+        loadingComicStories: true
+    })),
+    on(setComicStories, (state: ComicsState, { comicStories, append }) => ({
+        ...state,
+        comicStories: append
+            ? { ...state.comics, ...appendComicData(state, comicStories, 'comicStories') }
+            : comicStories,
         loadingComicStories: false
     }))
 );

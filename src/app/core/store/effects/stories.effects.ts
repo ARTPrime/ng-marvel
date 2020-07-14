@@ -6,6 +6,9 @@ import { filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { StoriesService } from '../../services/api/stories/stories.service';
 import { LocalStorageService } from '../../services/local-storage/local-storage.service';
 import {
+    appendStories,
+    appendStoryCharacters,
+    appendStoryComics,
     getStories,
     getStoryCharacters,
     getStoryComics,
@@ -22,8 +25,8 @@ export class StoriesEffects {
             this.actions$.pipe(
                 ofType(setStoryComics, setStoryCharacters, setStories),
                 withLatestFrom(this.store.select(selectStoriesState)),
-                filter(([, comics]) => !!comics),
-                tap(([, comics]) => this.localStorageService.setItem('Comics', comics))
+                filter(([, stories]) => !!stories),
+                tap(([, stories]) => this.localStorageService.setItem('Stories', stories))
             ),
         {
             dispatch: false
@@ -38,19 +41,43 @@ export class StoriesEffects {
         )
     );
 
+    public appendStories$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(appendStories),
+            switchMap(({ offset }) => this.storiesService.getStories(offset)),
+            map(stories => setStories({ stories, append: true }))
+        )
+    );
+
     public loadStoryComics$ = createEffect(() =>
         this.actions$.pipe(
             ofType(getStoryComics),
-            switchMap(({ id }) => this.storiesService.getStoryComics(id)),
+            switchMap(({ id, offset }) => this.storiesService.getStoryComics(id, offset)),
             map(storyComics => setStoryComics({ storyComics }))
+        )
+    );
+
+    public apppendStoryComics$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(appendStoryComics),
+            switchMap(({ id, offset }) => this.storiesService.getStoryComics(id, offset)),
+            map(storyComics => setStoryComics({ storyComics, append: true }))
         )
     );
 
     public loadStoryCharacters$ = createEffect(() =>
         this.actions$.pipe(
             ofType(getStoryCharacters),
-            switchMap(({ id }) => this.storiesService.getStoryCharcaters(id)),
+            switchMap(({ id, offset }) => this.storiesService.getStoryCharcaters(id, offset)),
             map(storyCharacters => setStoryCharacters({ storyCharacters }))
+        )
+    );
+
+    public appendStoryCharacters$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(appendStoryCharacters),
+            switchMap(({ id, offset }) => this.storiesService.getStoryCharcaters(id, offset)),
+            map(storyCharacters => setStoryCharacters({ storyCharacters, append: true }))
         )
     );
 

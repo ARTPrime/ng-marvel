@@ -36,6 +36,7 @@
 }
 
 .mv-chevron-down {
+    font-size: var(--unit-md);
     &:before {
         content: $mv-chevron-down;
     }

@@ -41,13 +41,5 @@ main {
     background-color: var(--mv-color-dark);
     transition: margin, transform, 300ms ease-in;
     position: relative;
-    .mv-toolbar {
-        width: calc(100% - var(--unit-xxxl));
-        display: inline-flex;
-        background-color: var(--mv-color-dark-shade);
-        height: var(--unit-xxxl);
-        vertical-align: top;
-        align-items: center;
-        padding: 0 var(--unit);
-    }
+    border-left: 2px solid var(--mv-color-dark-shade);
 }

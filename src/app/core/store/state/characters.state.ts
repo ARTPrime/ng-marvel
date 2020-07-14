@@ -4,6 +4,7 @@ export interface CharactersState {
     characterComics: MarvelCollection;
     characterStories: MarvelCollection;
 
+    loadingCharacter: boolean;
     loadingCharacters: boolean;
     loadingCharacterComics: boolean;
     loadingCharacterStories: boolean;
@@ -15,6 +16,7 @@ export const defaultCharacterState: CharactersState = {
     characterComics: null,
     characterStories: null,
 
+    loadingCharacter: false,
     loadingCharacters: false,
     loadingCharacterComics: false,
     loadingCharacterStories: false

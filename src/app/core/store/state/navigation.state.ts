@@ -12,7 +12,7 @@ export const defaultNavigationState: NavigationState = {
             },
             children: [
                 {
-                    text: 'All characters',
+                    text: 'Characters',
                     routerLink: ['/characters']
                 },
                 {
@@ -31,7 +31,7 @@ export const defaultNavigationState: NavigationState = {
             },
             children: [
                 {
-                    text: 'All comics',
+                    text: 'Comics',
                     routerLink: ['/comics']
                 },
                 {
@@ -52,8 +52,8 @@ export const defaultNavigationState: NavigationState = {
             },
             children: [
                 {
-                    text: 'All stories',
-                    routerLink: ['/stories']
+                    text: 'Stories characters',
+                    routerLink: ['/stories/characters']
                 },
                 {
                     text: 'Stories comics',

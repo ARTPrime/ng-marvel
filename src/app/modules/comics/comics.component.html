@@ -1,7 +1,34 @@
-<mv-gallery [items]="comics$ | async" [itemTemplate]="imgTemplate" [itemSize]="galleryItemSize">
+<mv-gallery
+    [items]="comics$ | async"
+    [offset]="initialOffset"
+    [itemTemplate]="imgTemplate"
+    [itemSize]="galleryItemSize"
+    [selectedItem]="selectedComic"
+>
     <ng-template #imgTemplate let-item>
-        <figure mvGalleryItem [item]="item" [itemSize]="galleryItemSize">
+        <figure
+            mvGalleryItem
+            [item]="item"
+            [selected]="selectedComic ? selectedComic.id === item.id : false"
+            [itemSize]="galleryItemSize"
+            (click)="onItemClick(item)"
+        >
             <figcaption>{{ item.title }}</figcaption>
         </figure>
     </ng-template>
 </mv-gallery>
+<section class="letter--buttons">
+    <button
+        mvButton
+        color="mv-dark-tint"
+        (click)="onAlphabetClick(char)"
+        fill="mv-transparent"
+        size="mv-button-small"
+        *ngFor="let char of alphabet"
+    >
+        {{ char | uppercase }}
+    </button>
+</section>
+<section>
+    <router-outlet></router-outlet>
+</section>
