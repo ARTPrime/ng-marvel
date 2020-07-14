@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { MvGalleryComponent } from '@shared/components/mv-gallery/mv-gallery.component';
 import { Observable, Subject } from 'rxjs';
@@ -41,7 +42,7 @@ export class CharacterComicsComponent implements OnInit, OnDestroy, AfterViewIni
     };
     private selectedCharacter: MarvelCharacter;
 
-    constructor(private store: Store) {}
+    constructor(private store: Store, private router: Router) {}
     public ngOnInit(): void {
         this.store
             .select(selectLoadingCharacterComics)
@@ -116,5 +117,6 @@ export class CharacterComicsComponent implements OnInit, OnDestroy, AfterViewIni
                 comic
             })
         );
+        this.router.navigate(['comics', 'view', comic.id]);
     }
 }

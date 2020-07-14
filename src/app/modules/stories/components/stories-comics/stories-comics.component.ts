@@ -1,15 +1,17 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { MvGalleryComponent } from '@shared/components/mv-gallery/mv-gallery.component';
 import { Observable, Subject } from 'rxjs';
 import { filter, map, takeUntil, tap } from 'rxjs/operators';
+import { setComic } from 'src/app/core/store/actions/comics.actions';
 import { appendStoryComics, setStory, setStoryComics } from 'src/app/core/store/actions/stories.actions';
 import { setSelectedItem, toolbarLoading } from 'src/app/core/store/actions/toolbar.actions';
 import {
-  selectLoadingStoryComics,
-  selectStories,
-  selectStory,
-  selectStoryComics
+    selectLoadingStoryComics,
+    selectStories,
+    selectStory,
+    selectStoryComics
 } from 'src/app/core/store/selectors/stories.selectors';
 
 @Component({
@@ -37,7 +39,7 @@ export class StoriesComicsComponent implements OnInit, OnDestroy, AfterViewInit 
     };
     private selectedStory: MarvelStory;
 
-    constructor(private store: Store) {}
+    constructor(private store: Store, private router: Router) {}
     public ngOnInit(): void {
         this.store
             .select(selectLoadingStoryComics)
@@ -106,12 +108,12 @@ export class StoriesComicsComponent implements OnInit, OnDestroy, AfterViewInit 
         this.store.dispatch(setSelectedItem(undefined));
     }
 
-    public onItemClick(character: MarvelComic) {
-        // this.store.dispatch(
-        //     setCharacater({
-        //         character
-        //     })
-        // );
-        console.log(character);
+    public onItemClick(comic: MarvelComic) {
+        this.store.dispatch(
+            setComic({
+                comic
+            })
+        );
+        this.router.navigate(['comics', 'view', comic.id]);
     }
 }

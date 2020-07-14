@@ -1,14 +1,16 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { MvGalleryComponent } from '@shared/components/mv-gallery/mv-gallery.component';
 import { Observable, Subject } from 'rxjs';
 import { filter, map, takeUntil, tap } from 'rxjs/operators';
+import { setCharacater } from 'src/app/core/store/actions/characters.actions';
 import { appendStoryCharacters, setStory, setStoryCharacters } from 'src/app/core/store/actions/stories.actions';
 import { setSelectedItem, toolbarLoading } from 'src/app/core/store/actions/toolbar.actions';
 import {
-  selectLoadingStoryharacters,
-  selectStory,
-  selectStoryCharacters
+    selectLoadingStoryharacters,
+    selectStory,
+    selectStoryCharacters
 } from 'src/app/core/store/selectors/stories.selectors';
 
 @Component({
@@ -36,7 +38,7 @@ export class StoriesCharactersComponent implements OnInit, OnDestroy, AfterViewI
     };
     private selectedStory: MarvelStory;
 
-    constructor(private store: Store) {}
+    constructor(private store: Store, private router: Router) {}
     public ngOnInit(): void {
         this.store
             .select(selectLoadingStoryharacters)
@@ -106,11 +108,11 @@ export class StoriesCharactersComponent implements OnInit, OnDestroy, AfterViewI
     }
 
     public onItemClick(character: MarvelCharacter) {
-        // this.store.dispatch(
-        //     setCharacater({
-        //         character
-        //     })
-        // );
-        console.log(character);
+        this.store.dispatch(
+            setCharacater({
+                character
+            })
+        );
+        this.router.navigate(['characters', 'view', character.id]);
     }
 }

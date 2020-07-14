@@ -1,8 +1,10 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { MvGalleryComponent } from '@shared/components/mv-gallery/mv-gallery.component';
 import { Observable, Subject } from 'rxjs';
 import { filter, map, takeUntil, tap } from 'rxjs/operators';
+import { setCharacater } from 'src/app/core/store/actions/characters.actions';
 import { appendComicCharacters, setComic, setComicCharacters } from 'src/app/core/store/actions/comics.actions';
 import { setSelectedItem, toolbarLoading } from 'src/app/core/store/actions/toolbar.actions';
 import {
@@ -36,7 +38,7 @@ export class ComicsCharactersComponent implements OnInit, OnDestroy, AfterViewIn
     };
     private selectedComic: MarvelComic;
 
-    constructor(private store: Store) {}
+    constructor(private store: Store, private router: Router) {}
     public ngOnInit(): void {
         this.store
             .select(selectLoadingComicharacters)
@@ -106,11 +108,11 @@ export class ComicsCharactersComponent implements OnInit, OnDestroy, AfterViewIn
     }
 
     public onItemClick(character: MarvelCharacter) {
-        // this.store.dispatch(
-        //     setCharacater({
-        //         character
-        //     })
-        // );
-        console.log(character);
+        this.store.dispatch(
+            setCharacater({
+                character
+            })
+        );
+        this.router.navigate(['characters', 'view', character.id]);
     }
 }
